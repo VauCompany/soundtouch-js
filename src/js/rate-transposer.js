@@ -18,6 +18,10 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+var extend = require('./core').extend;
+
+var AbstractFifoSamplePipe = require('./pipe');
+
 function RateTransposer(createBuffers) {
     AbstractFifoSamplePipe.call(this, createBuffers);
     this._reset();
@@ -53,7 +57,7 @@ extend(RateTransposer.prototype, {
     },
 
     _transpose: function (numFrames) {
-        if (numFrames == 0) {
+        if (numFrames === 0) {
             // no work
             return 0;
         }
@@ -76,7 +80,7 @@ extend(RateTransposer.prototype, {
 
         this.slopeCount -= 1.0;
 
-        if (numFrames != 1) {
+        if (numFrames !== 1) {
             out: while (true) {
                 while (this.slopeCount > 1.0) {
                     this.slopeCount -= 1.0;
@@ -101,3 +105,5 @@ extend(RateTransposer.prototype, {
         return i;
     }
 });
+
+module.exports = RateTransposer;

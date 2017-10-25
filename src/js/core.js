@@ -18,7 +18,7 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-function extend(a,b) {
+export function extend(a,b) {
     for ( var i in b ) {
         var g = b.__lookupGetter__(i), s = b.__lookupSetter__(i);
        
@@ -33,6 +33,6 @@ function extend(a,b) {
     return a;
 }
 
-function testFloatEqual(a, b) {
+export function testFloatEqual(a, b) {
     return (a > b ? a - b : b - a) > 1e-10;
 }

@@ -18,6 +18,8 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+var extend = require('./core').extend;
+
 function FilterSupport(pipe) {
     this._pipe = pipe;
 }
@@ -127,3 +129,5 @@ extend(SimpleFilter.prototype, {
         this.outputBufferPosition = 0;
     }
 });
+
+module.exports = SimpleFilter;

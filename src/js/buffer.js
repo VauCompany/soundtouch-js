@@ -19,7 +19,7 @@
 */
 
 function FifoSampleBuffer() {
-    this._vector = new Float32Array();
+    this._vector = new Float32Array(0);
     this._position = 0;
     this._frameCount = 0;
 }
@@ -46,7 +46,7 @@ FifoSampleBuffer.prototype = {
     },
 
     clear: function() {
-        this.receive(frameCount);
+        this.receive(this._frameCount);
         this.rewind();
     },
 
@@ -123,3 +123,5 @@ FifoSampleBuffer.prototype = {
         }
     }
 };
+
+module.exports = FifoSampleBuffer;

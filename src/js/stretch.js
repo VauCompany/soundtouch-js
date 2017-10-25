@@ -20,6 +20,10 @@
 
 //'use strict';
 
+var extend = require('./core').extend;
+var AbstractFifoSamplePipe = require('./pipe');
+
+
 /**
 * Giving this value for the sequence length sets automatic parameter value
 * according to tempo setting (recommended)
@@ -267,7 +271,7 @@ extend(Stretch.prototype, {
 
     clone: function () {
         var result = new Stretch();
-        result.tempo = this.tempo;
+        result.tempo = this._tempo;
         result.setParameters(this.sampleRate, this.sequenceMs, this.seekWindowMs, this.overlapMs);
         return result;
     },
@@ -294,7 +298,7 @@ extend(Stretch.prototype, {
     */
     seekBestOverlapPositionStereo: function () {
         var bestOffs;
-        var bestCorr
+        var bestCorr;
         var corr;
         var i;
 
@@ -515,3 +519,5 @@ extend(Stretch.prototype, {
       return this._tempo;
     }
 });
+
+module.exports = Stretch;

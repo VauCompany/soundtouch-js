@@ -18,6 +18,13 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+var extend = require('./core').extend;
+var testFloatEqual = require('./core').testFloatEqual;
+
+var RateTransposer = require('./rate-transposer');
+var FifoSampleBuffer = require('./buffer');
+var Stretch = require('./stretch');
+
 function SoundTouch() {
     this.rateTransposer = new RateTransposer(false);
     this.tdStretch = new Stretch(false);
@@ -38,8 +45,8 @@ function SoundTouch() {
 
 extend(SoundTouch.prototype, {
     clear: function () {
-        rateTransposer.clear();
-        tdStretch.clear();
+        this.rateTransposer.clear();
+        this.tdStretch.clear();
     },
 
     clone: function () {
@@ -112,7 +119,7 @@ extend(SoundTouch.prototype, {
         }
 
         if (this._rate > 1.0) {
-            if (this._outputBuffer != this.rateTransposer.outputBuffer) {
+            if (this._outputBuffer !== this.rateTransposer.outputBuffer) {
                 this.tdStretch.inputBuffer = this._inputBuffer;
                 this.tdStretch.outputBuffer = this._intermediateBuffer;
 
@@ -121,7 +128,7 @@ extend(SoundTouch.prototype, {
             }
         }
         else {
-            if (this._outputBuffer != this.tdStretch.outputBuffer) {
+            if (this._outputBuffer !== this.tdStretch.outputBuffer) {
                 this.rateTransposer.inputBuffer = this._inputBuffer;
                 this.rateTransposer.outputBuffer = this._intermediateBuffer;
 
@@ -142,3 +149,5 @@ extend(SoundTouch.prototype, {
         }
     }
 });
+
+module.exports = SoundTouch;
